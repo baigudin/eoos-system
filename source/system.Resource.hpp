@@ -8,14 +8,14 @@
 #ifndef SYSTEM_RESOURCE_HPP_
 #define SYSTEM_RESOURCE_HPP_
 
-#include "Object.hpp"
+#include "system.Object.hpp"
 #include "api.System.hpp"
 
 namespace system
 {
-    class Resource : public ::Object<>, public ::api::System
+    class Resource : public ::system::Object, public ::api::System
     {
-        typedef ::Object<> Parent;
+        typedef ::system::Object Parent;
       
     public:
     

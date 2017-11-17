@@ -8,7 +8,7 @@
 #ifndef SYSTEM_TASK_MAIN_HPP_
 #define SYSTEM_TASK_MAIN_HPP_
 
-#include "Object.hpp"
+#include "system.Object.hpp"
 #include "api.Task.hpp"
 #include "Main.hpp" 
 
@@ -17,9 +17,9 @@ namespace system
     /**
      * User main thread.
      */ 
-    class TaskMain : public ::Object<>, public ::api::Task
+    class TaskMain : public ::system::Object, public ::api::Task
     {
-        typedef ::Object<> Parent;
+        typedef ::system::Object Parent;
       
     public:
     

@@ -6,8 +6,8 @@
  * @license   http://embedded.team/license/
  */
 #include "system.Main.hpp" 
+#include "system.Allocator.hpp" 
 #include "system.TaskMain.hpp"
-#include "system.Thread.hpp"
 #include "system.Resource.hpp"
 #include "Allocator.hpp" 
 
@@ -22,43 +22,48 @@ namespace system
      */
     int32 Main::main(::api::Kernel& kernel)
     {
+        if( not kernel.isConstructed() ) return -1;    
+        Resource system(kernel);        
+        system_ = &system;
+        kernel_ = &kernel;        
         int32 stage = 0;
         int32 error = -1;
-        system_ = NULL;
-        global_ = NULL;
-        kernel_ = &kernel;
+        ::api::Thread* thread = NULL;
+        ::api::Toggle* global = &kernel.getGlobalInterrupt();                
+        ::api::Heap& heap = kernel.getHeap();
+        ::api::Scheduler& scheduler = kernel.getScheduler();        
+        ::system::Allocator::setHeap(heap);        
         do
         {
-            // Stage 1: Create the system resource factory
+            // Stage 1: set the system resource factory
             stage++;
-            system_ = new Resource(kernel);
             if(system_ == NULL || not system_->isConstructed()) break; 
-            // Stage 2: Set heap interrupt controller
+            // Stage 2: set heap interrupt controller
             stage++;        
-            ::api::Heap* heap = NULL;
-            if(heap == NULL || not heap->isConstructed()) break;
-            global_ = &kernel.getGlobalInterrupt();
-            heap->setToggle(global_);
-            // Stage complete
-            stage = -1;
-            int32 stack = kernel.getStackSize();
-            TaskMain task(stack);
-            Thread thread(task);
-            if( not thread.isConstructed() ) break; 
-            thread.start();
-            thread.yield();
-            thread.join();
+            heap.setToggle(global);            
+            // Stage 3: create first user thread
+            stage++;
+            TaskMain task( kernel.getStackSize() );
+            thread = scheduler.createThread(task);
+            if(thread == NULL || not thread->isConstructed() ) break; 
+            // Stage complete: start first user thread
+            stage = -1;            
+            thread->start();
+            scheduler.yield();
+            thread->join();
             error = task.error();
         }
         while(false);
         switch(stage)
         {
             default:
-            case 2: 
-                global_ = NULL;
+            case 3: 
+                delete thread;
                             
-            case 1: 
-                delete system_;
+            case 2: 
+                heap.resetToggle();            
+                            
+            case 1:
                 
             case 0: 
                 break;
@@ -81,11 +86,6 @@ namespace system
      * The operating system factory resource (no boot).
      */
     ::api::System* Main::system_;
-    
-    /**
-     * The operating system global interrupt resource (no boot).
-     */
-    ::api::Toggle* Main::global_;
     
     /**
      * The operating system kernel factory resource (no boot).

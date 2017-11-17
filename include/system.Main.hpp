@@ -42,11 +42,6 @@ namespace system
         static ::api::System* system_;
         
         /**
-         * The operating system global interrupt resource (no boot).
-         */
-        static ::api::Toggle* global_;         
-        
-        /**
          * The operating system kernel factory resource (no boot).
          */
         static ::api::Kernel* kernel_;
