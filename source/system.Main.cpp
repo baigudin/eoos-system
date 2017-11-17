@@ -9,7 +9,6 @@
 #include "system.TaskMain.hpp"
 #include "system.Thread.hpp"
 #include "system.Resource.hpp"
-#include "kernel.Kernel.hpp" 
 #include "Allocator.hpp" 
 
 namespace system
@@ -21,11 +20,8 @@ namespace system
      * @param kernel a kernel resources factory.
      * @return error code or zero.
      */
-    int32 Main::main()
+    int32 Main::main(::api::Kernel& kernel)
     {
-        const ::Configuration config;    
-        ::kernel::Kernel kernel(config);
-        
         int32 stage = 0;
         int32 error = -1;
         system_ = NULL;
@@ -35,17 +31,17 @@ namespace system
         {
             // Stage 1: Create the system resource factory
             stage++;
-            system_ = new Resource(*kernel_);
+            system_ = new Resource(kernel);
             if(system_ == NULL || not system_->isConstructed()) break; 
             // Stage 2: Set heap interrupt controller
             stage++;        
             ::api::Heap* heap = NULL;
             if(heap == NULL || not heap->isConstructed()) break;
-            global_ = &kernel_->getGlobalInterrupt();
+            global_ = &kernel.getGlobalInterrupt();
             heap->setToggle(global_);
             // Stage complete
             stage = -1;
-            int32 stack = kernel_->getStackSize();
+            int32 stack = kernel.getStackSize();
             TaskMain task(stack);
             Thread thread(task);
             if( not thread.isConstructed() ) break; 
@@ -96,23 +92,5 @@ namespace system
      */
     ::api::Kernel* Main::kernel_;
 
-}
-
-/**
- * The main function.
- * 
- * The method should be called after default boot initialization, and
- * the following tasks must be:
- * 1. Stack has been set.
- * 2. CPU registers have been set.
- * 3. Run-time initialization has been completed.
- * 4. Global variables have been set.
- * 5. Global constructors have been called.
- * 
- * @return error code or zero.
- */
-int main()
-{
-    return static_cast<int>( ::system::Main::main() );
 }
 

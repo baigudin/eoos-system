@@ -25,7 +25,7 @@ namespace system
          * @param kernel a kernel resources factory.
          * @return error code or zero.
          */
-        static int32 main();
+        static int32 main(::api::Kernel& kernel);
         
         /**
          * Returns the operating system factory resource.
