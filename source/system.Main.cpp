@@ -41,12 +41,12 @@ namespace system
             // Stage 2: set heap interrupt controller
             stage++;        
             heap.setToggle(global);            
-            // Stage 3: create first user thread
+            // Stage 3: create a first user thread
             stage++;
             TaskMain task( kernel.getStackSize() );
             thread = scheduler.createThread(task);
             if(thread == NULL || not thread->isConstructed() ) break; 
-            // Stage complete: start first user thread
+            // Stage complete: start the first user thread
             stage = -1;            
             thread->start();
             scheduler.yield();
