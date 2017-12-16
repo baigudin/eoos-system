@@ -84,8 +84,13 @@ namespace system
      */
     ::api::System& Main::getSystem()
     {
-        if(system_ == NULL) kernel_->getGlobalInterrupt().disable();
-        return *system_;
+        if(system_ != NULL) 
+        {
+            return *system_;
+        }
+        // The critical situation that cannot be normally occurred
+        kernel_->getGlobalInterrupt().disable();
+        while(true);        
     }
     
     /**
