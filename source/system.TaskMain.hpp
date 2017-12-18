@@ -44,12 +44,12 @@ namespace system
          * Tests if this object has been constructed.
          *
          * @return true if object has been constructed successfully.
-         */    
+         */         
         virtual bool isConstructed() const
         {
-            return this->Parent::isConstructed();
+            return isConstructed_;
         }        
-        
+
         /**
          * The method with self context.
          */  

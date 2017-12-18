@@ -42,7 +42,10 @@ namespace system
             {
                 // Stage 1: set the system resource factory
                 stage++;
-                if( not system.isConstructed()) break; 
+                if( not system.isConstructed()) 
+                {
+                    break; 
+                }
                 // Stage 2: set heap interrupt controller
                 stage++;        
                 heap.setToggle(global);            
@@ -50,7 +53,10 @@ namespace system
                 stage++;
                 TaskMain task( kernel.getStackSize() );
                 thread = scheduler.createThread(task);
-                if(thread == NULL || not thread->isConstructed() ) break; 
+                if(thread == NULL || not thread->isConstructed() ) 
+                {
+                    break; 
+                }
                 // Stage complete: start the first user thread
                 stage = -1;            
                 thread->start();
