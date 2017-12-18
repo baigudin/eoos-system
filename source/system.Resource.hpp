@@ -84,7 +84,8 @@ namespace system
         virtual void terminate()
         {
             if( not isConstructed_ ) while(true);
-            kernel_.getRuntime().terminate(-1);
+            ::api::Runtime& runtime = kernel_.getRuntime();
+            runtime.terminate(-1);
         }
         
     private:
