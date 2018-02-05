@@ -90,8 +90,7 @@ namespace system
             {
                 while(true);
             }
-            ::api::Runtime& runtime = kernel_.getRuntime();
-            runtime.terminate(-1);
+            kernel_.getRuntime().terminate(-1);
         }
         
     private:

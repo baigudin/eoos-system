@@ -15,7 +15,7 @@ namespace system
      * @param size number of bytes to allocate.
      * @return allocated memory address or a null pointer.
      */    
-    void* Allocator::allocate(size_t size)
+    void* Allocator::allocate(const size_t size)
     {
         return heap_ != NULL ? heap_->allocate(size, NULL) : NULL;
     }
@@ -25,7 +25,7 @@ namespace system
      *
      * @param ptr address of allocated memory block or a null pointer.
      */      
-    void Allocator::free(void* ptr)
+    void Allocator::free(void* const ptr)
     {
         if(heap_ != NULL && ptr != NULL) 
         {
