@@ -9,7 +9,6 @@
 #include "system.Allocator.hpp" 
 #include "system.TaskMain.hpp"
 #include "system.Resource.hpp"
-#include "Allocator.hpp" 
 
 namespace system
 {
@@ -22,7 +21,10 @@ namespace system
      */
     int32 Main::main(::api::Kernel& kernel)
     {
-        if( not kernel.isConstructed() ) return -1;    
+        if( not kernel.isConstructed() ) 
+        {
+            return -1;
+        }
         Resource system(kernel);        
         system_ = &system;
         kernel_ = &kernel;        
@@ -37,7 +39,10 @@ namespace system
         {
             // Stage 1: set the system resource factory
             stage++;
-            if(system_ == NULL || not system_->isConstructed()) break; 
+            if( not system.isConstructed()) 
+            {
+                break; 
+            }
             // Stage 2: set heap interrupt controller
             stage++;        
             heap.setToggle(global);            
@@ -45,7 +50,10 @@ namespace system
             stage++;
             TaskMain task( kernel.getStackSize() );
             thread = scheduler.createThread(task);
-            if(thread == NULL || not thread->isConstructed() ) break; 
+            if(thread == NULL || not thread->isConstructed() ) 
+            {
+                break; 
+            }
             // Stage complete: start the first user thread
             stage = -1;            
             thread->start();
@@ -59,12 +67,12 @@ namespace system
             default:
             case 3: 
                 delete thread;
-                            
+
             case 2: 
                 heap.resetToggle();            
                             
             case 1:
-                
+            
             case 0: 
                 break;
         }
@@ -78,8 +86,13 @@ namespace system
      */
     ::api::System& Main::getSystem()
     {
-        if(system_ == NULL) kernel_->getGlobalInterrupt().disable();
-        return *system_;
+        if(system_ != NULL) 
+        {
+            return *system_;
+        }
+        // The critical situation that cannot be normally occurred
+        kernel_->getGlobalInterrupt().disable();
+        while(true);        
     }
     
     /**

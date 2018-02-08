@@ -52,7 +52,10 @@ namespace system
          */      
         virtual ::api::Kernel& getKernel()
         {
-            if( not isConstructed_ ) terminate();        
+            if( not isConstructed_ ) 
+            {
+                terminate();        
+            }
             return kernel_;
         }
         
@@ -83,7 +86,10 @@ namespace system
          */
         virtual void terminate()
         {
-            if( not isConstructed_ ) while(true);
+            if( not isConstructed_ ) 
+            {
+                while(true);
+            }
             kernel_.getRuntime().terminate(-1);
         }
         
@@ -96,8 +102,14 @@ namespace system
          */    
         bool construct()
         {
-            if( not isConstructed_ ) return false;
-            if( not kernel_.isConstructed() ) return false;
+            if( not isConstructed_ ) 
+            {
+                return false;
+            }
+            if( not kernel_.isConstructed() ) 
+            {
+                return false;
+            }
             return true;
         }        
         
