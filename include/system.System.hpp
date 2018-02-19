@@ -11,7 +11,7 @@
 #include "system.Object.hpp"
 #include "api.System.hpp"
 #include "kernel.Kernel.hpp"
-#include "Configuration.hpp"
+#include "global.Configuration.hpp"
 
 namespace system
 {
@@ -45,25 +45,25 @@ namespace system
          * @return the heap memory.
          */
         virtual ::api::Heap& getHeap() const;
-        
-        /**
-         * Returns running time of the operating system in milliseconds.
-         *
-         * @return time in milliseconds.
-         */
-        virtual int64 getTimeMs() const;
            
         /**
          * Returns running time of the operating system in nanoseconds.
          *
          * @return time in nanoseconds.
          */
-        virtual int64 getTimeNs() const;
+        virtual int64 getTime() const;
         
         /**
          * Terminates the operating system execution.
          */
         virtual void terminate() const;                   
+        
+        /**
+         * Executes the operating system.
+         *
+         * @return zero, or error code if the execution has been terminated.
+         */
+        int32 execute();        
     
         /** 
          * Returns the operating system syscall interface.
@@ -80,6 +80,11 @@ namespace system
              * No errors occurred.
              */
             SYSER_OK,
+            
+            /**
+             * Error of the operating system has not been initialized.
+             */
+            SYSER_INITIALIZATION_FAILED,
 
             /**
              * Error of a user program occurred.
@@ -111,6 +116,21 @@ namespace system
          * @param error a termination status code.
          */
         static void terminate(Error error);
+        
+        /**
+         * Copy constructor.
+         *
+         * @param obj a reference to source object.
+         */
+        System(const System& obj);
+      
+        /**
+         * Assignment operator.
+         *
+         * @param obj a reference to source object.
+         * @return reference to this object.     
+         */
+        System& operator =(const System& obj);        
     
         /**
          * The operatin system interface.
@@ -120,9 +140,9 @@ namespace system
         /**    
          * Configuration of the operating system .    
          *
-         * NOTE: the variable must be the first, as it must be initialized first.
+         * NOTE: The variable must be the first, as it must be initialized first.
          */
-        const ::Configuration config_;        
+        const ::global::Configuration config_;        
         
         /**
          * The operating system kernel.

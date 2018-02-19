@@ -8,11 +8,11 @@
 #ifndef SYSTEM_ALLOCATOR_HPP_
 #define SYSTEM_ALLOCATOR_HPP_
 
-#include "Types.hpp"
+#include "api.Constant.hpp"
 
 namespace system
 {
-    class Allocator
+    class Allocator : public ::api::Constant
     {
     
     public:

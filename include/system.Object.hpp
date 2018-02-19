@@ -8,14 +8,14 @@
 #ifndef SYSTEM_OBJECT_HPP_
 #define SYSTEM_OBJECT_HPP_
 
-#include "Object.hpp"
+#include "global.Object.hpp"
 #include "system.Allocator.hpp"
 
 namespace system
 {
-    class Object : public ::Object<Allocator>
+    class Object : public ::global::Object<Allocator>
     {
-        typedef ::Object<Allocator> Parent;        
+        typedef ::global::Object<Allocator> Parent;        
       
     public:
     

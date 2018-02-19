@@ -6,6 +6,7 @@
  * @license   http://embedded.team/license/
  */
 #include "system.System.hpp"
+#include "global.Program.hpp"
 
 namespace system
 {
@@ -49,23 +50,15 @@ namespace system
         }
         return kernel_.getHeap();
     }    
-    
-    /**
-     * Returns running time of the operating system in milliseconds.
-     *
-     * @return time in milliseconds.
-     */
-    int64 System::getTimeMs() const
-    {
-    }
        
     /**
      * Returns running time of the operating system in nanoseconds.
      *
      * @return time in nanoseconds.
      */
-    int64 System::getTimeNs() const
+    int64 System::getTime() const
     {
+        return 0;
     }
     
     /**
@@ -76,6 +69,20 @@ namespace system
     void System::terminate() const
     {
         terminate(SYSER_USER_TERMINATION);
+    }
+    
+    /**
+     * Executes the operating system.
+     *
+     * @return zero, or error code if the execution has been terminated.
+     */
+    int32 System::execute()
+    {
+        if( not Self::isConstructed() )
+        {
+            return SYSER_INITIALIZATION_FAILED;
+        }
+        return ::global::Program::start();
     }
 
     /** 
@@ -120,7 +127,7 @@ namespace system
      *
      * @param error a termination status code.
      */
-    void System::terminate(Error error)
+    void System::terminate(Error)
     {
         // ... TODO ...
         while(true);
@@ -147,6 +154,6 @@ namespace system
 int main()
 {
     ::system::System eoos;
-    return eoos.isConstructed() ? 0 : -1;
+    return eoos.execute();
 }
 
