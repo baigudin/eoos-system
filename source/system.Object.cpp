@@ -7,21 +7,23 @@
  */
 #include "system.Object.hpp"
 
-namespace system
+namespace global
 {
-    /** 
-     * Constructor.
-     */  
-    Object::Object() : Parent()
+    namespace system
     {
-    }
+        /** 
+        * Constructor.
+        */  
+        Object::Object() : Parent()
+        {
+        }
+        
+        /** 
+        * Destructor.
+        */    
+        Object::~Object()
+        {
+        }      
     
-    /** 
-     * Destructor.
-     */    
-    Object::~Object()
-    {
-    }      
-
+    }
 }
-

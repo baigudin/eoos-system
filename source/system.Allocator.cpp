@@ -7,26 +7,29 @@
  */
 #include "system.Allocator.hpp"
 
-namespace system
+namespace global
 {
-    /**
-     * Allocates memory.
-     *
-     * @param size number of bytes to allocate.
-     * @return allocated memory address or a null pointer.
-     */    
-    void* Allocator::allocate(const size_t)
+    namespace system
     {
-        return NULL;
+        /**
+        * Allocates memory.
+        *
+        * @param size number of bytes to allocate.
+        * @return allocated memory address or a null pointer.
+        */    
+        void* Allocator::allocate(const size_t)
+        {
+            return NULL;
+        }
+        
+        /**
+        * Frees an allocated memory.
+        *
+        * @param ptr address of allocated memory block or a null pointer.
+        */      
+        void Allocator::free(void* const)
+        {
+        }
+        
     }
-    
-    /**
-     * Frees an allocated memory.
-     *
-     * @param ptr address of allocated memory block or a null pointer.
-     */      
-    void Allocator::free(void* const)
-    {
-    }
-    
 }

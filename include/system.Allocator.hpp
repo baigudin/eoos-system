@@ -10,28 +10,31 @@
 
 #include "api.Constant.hpp"
 
-namespace system
+namespace global
 {
-    class Allocator : public ::api::Constant
+    namespace system
     {
+        class Allocator : public api::Constant
+        {
+        
+        public:
+        
+            /**
+            * Allocates memory.
+            *
+            * @param size number of bytes to allocate.
+            * @return allocated memory address or a null pointer.
+            */    
+            static void* allocate(size_t size);
+        
+            /**
+            * Frees an allocated memory.
+            *
+            * @param ptr address of allocated memory block or a null pointer.
+            */      
+            static void free(void* ptr);
     
-    public:
-    
-        /**
-         * Allocates memory.
-         *
-         * @param size number of bytes to allocate.
-         * @return allocated memory address or a null pointer.
-         */    
-        static void* allocate(size_t size);
-      
-        /**
-         * Frees an allocated memory.
-         *
-         * @param ptr address of allocated memory block or a null pointer.
-         */      
-        static void free(void* ptr);
-
-    };
-}
+        };
+    }
+}    
 #endif // SYSTEM_ALLOCATOR_HPP_

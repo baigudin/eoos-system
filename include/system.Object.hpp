@@ -8,27 +8,30 @@
 #ifndef SYSTEM_OBJECT_HPP_
 #define SYSTEM_OBJECT_HPP_
 
-#include "global.Object.hpp"
+#include "Object.hpp"
 #include "system.Allocator.hpp"
 
-namespace system
+namespace global
 {
-    class Object : public ::global::Object<Allocator>
+    namespace system
     {
-        typedef ::global::Object<Allocator> Parent;        
-      
-    public:
+        class Object : public ::global::Object<Allocator>
+        {
+            typedef ::global::Object<Allocator> Parent;        
+        
+        public:
+        
+            /** 
+            * Constructor.
+            */  
+            Object();
     
-        /** 
-         * Constructor.
-         */  
-        Object();
-
-        /** 
-         * Destructor.
-         */    
-        virtual ~Object();       
-    
-    };
+            /** 
+            * Destructor.
+            */    
+            virtual ~Object();       
+        
+        };
+    }
 }
 #endif // SYSTEM_OBJECT_HPP_
