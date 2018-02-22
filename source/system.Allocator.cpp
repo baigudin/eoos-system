@@ -12,21 +12,21 @@ namespace global
     namespace system
     {
         /**
-        * Allocates memory.
-        *
-        * @param size number of bytes to allocate.
-        * @return allocated memory address or a null pointer.
-        */    
+         * Allocates memory.
+         *
+         * @param size number of bytes to allocate.
+         * @return allocated memory address or a null pointer.
+         */    
         void* Allocator::allocate(const size_t)
         {
             return NULL;
         }
         
         /**
-        * Frees an allocated memory.
-        *
-        * @param ptr address of allocated memory block or a null pointer.
-        */      
+         * Frees an allocated memory.
+         *
+         * @param ptr address of allocated memory block or a null pointer.
+         */      
         void Allocator::free(void* const)
         {
         }

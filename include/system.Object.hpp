@@ -22,13 +22,13 @@ namespace global
         public:
         
             /** 
-            * Constructor.
-            */  
+             * Constructor.
+             */  
             Object();
     
             /** 
-            * Destructor.
-            */    
+             * Destructor.
+             */    
             virtual ~Object();       
         
         };

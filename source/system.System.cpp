@@ -13,8 +13,8 @@ namespace global
     namespace system
     {
         /** 
-        * Constructor.
-        */    
+         * Constructor.
+         */    
         System::System() : Parent(),
             config_ (),
             kernel_ (config_){
@@ -23,27 +23,27 @@ namespace global
         }
         
         /** 
-        * Destructor.
-        */
+         * Destructor.
+         */
         System::~System()
         {
         }
         
         /**
-        * Tests if this object has been constructed.
-        *
-        * @return true if object has been constructed successfully.
-        */    
+         * Tests if this object has been constructed.
+         *
+         * @return true if object has been constructed successfully.
+         */    
         bool System::isConstructed() const
         {
             return Parent::getConstruct();
         }
         
         /**
-        * Returns the operating system heap memory.
-        *
-        * @return the heap memory.
-        */
+         * Returns the operating system heap memory.
+         *
+         * @return the heap memory.
+         */
         api::Heap& System::getHeap() const
         {
             if( not Self::isConstructed() )
@@ -54,30 +54,30 @@ namespace global
         }    
         
         /**
-        * Returns running time of the operating system in nanoseconds.
-        *
-        * @return time in nanoseconds.
-        */
+         * Returns running time of the operating system in nanoseconds.
+         *
+         * @return time in nanoseconds.
+         */
         int64 System::getTime() const
         {
             return 0;
         }
         
         /**
-        * Terminates the operating system execution.
-        *
-        * @param status a termination status.
-        */
+         * Terminates the operating system execution.
+         *
+         * @param status a termination status.
+         */
         void System::terminate() const
         {
             terminate(SYSER_USER_TERMINATION);
         }
         
         /**
-        * Executes the operating system.
-        *
-        * @return zero, or error code if the execution has been terminated.
-        */
+         * Executes the operating system.
+         *
+         * @return zero, or error code if the execution has been terminated.
+         */
         int32 System::execute()
         {
             if( not Self::isConstructed() )
@@ -88,10 +88,10 @@ namespace global
         }
     
         /** 
-        * Returns the operating system syscall interface.
-        *
-        * @return the operating system syscall interface.
-        */   
+         * Returns the operating system syscall interface.
+         *
+         * @return the operating system syscall interface.
+         */   
         api::System& System::call()
         {
             if(system_ == NULL)
@@ -102,10 +102,10 @@ namespace global
         }
         
         /**
-        * Constructs this object.
-        *
-        * @return true if object has been constructed successfully.     
-        */    
+         * Constructs this object.
+         *
+         * @return true if object has been constructed successfully.     
+         */    
         bool System::construct()
         {
             if( not Self::isConstructed() )
@@ -125,10 +125,10 @@ namespace global
         }
         
         /**
-        * Terminates the operating system execution.
-        *
-        * @param error a termination status code.
-        */
+         * Terminates the operating system execution.
+         *
+         * @param error a termination status code.
+         */
         void System::terminate(Error)
         {
             // ... TODO ...
@@ -136,8 +136,8 @@ namespace global
         }
         
         /**
-        * The operatin system interface.
-        */
+         * The operatin system interface.
+         */
         api::System* System::system_ = NULL;
     }
 }

@@ -12,15 +12,15 @@ namespace global
     namespace system
     {
         /** 
-        * Constructor.
-        */  
+         * Constructor.
+         */  
         Object::Object() : Parent()
         {
         }
         
         /** 
-        * Destructor.
-        */    
+         * Destructor.
+         */    
         Object::~Object()
         {
         }      
