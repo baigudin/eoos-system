@@ -36,7 +36,7 @@ namespace global
          */    
         bool System::isConstructed() const
         {
-            return Parent::getConstruct();
+            return getConstruct();
         }
         
         /**

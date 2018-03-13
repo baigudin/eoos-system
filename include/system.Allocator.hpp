@@ -8,13 +8,13 @@
 #ifndef SYSTEM_ALLOCATOR_HPP_
 #define SYSTEM_ALLOCATOR_HPP_
 
-#include "api.Constant.hpp"
+#include "Types.hpp"
 
 namespace global
 {
     namespace system
     {
-        class Allocator : public api::Constant
+        class Allocator
         {
         
         public:
