@@ -2,50 +2,34 @@
  * The operating system memory allocator.
  * 
  * @author    Sergey Baigudin, sergey@baigudin.software
- * @copyright 2016-2017, Embedded Team, Sergey Baigudin
+ * @copyright 2016-2018, Embedded Team, Sergey Baigudin
  * @license   http://embedded.team/license/
  */
 #include "system.Allocator.hpp"
 
-namespace system
+namespace global
 {
-    /**
-     * Allocates memory.
-     *
-     * @param size number of bytes to allocate.
-     * @return allocated memory address or a null pointer.
-     */    
-    void* Allocator::allocate(const size_t size)
+    namespace system
     {
-        return heap_ != NULL ? heap_->allocate(size, NULL) : NULL;
-    }
-    
-    /**
-     * Frees an allocated memory.
-     *
-     * @param ptr address of allocated memory block or a null pointer.
-     */      
-    void Allocator::free(void* const ptr)
-    {
-        if(heap_ != NULL && ptr != NULL) 
+        /**
+         * Allocates memory.
+         *
+         * @param size number of bytes to allocate.
+         * @return allocated memory address or a null pointer.
+         */    
+        void* Allocator::allocate(const size_t)
         {
-            heap_->free(ptr);  
+            return NULL;
         }
+        
+        /**
+         * Frees an allocated memory.
+         *
+         * @param ptr address of allocated memory block or a null pointer.
+         */      
+        void Allocator::free(void* const)
+        {
+        }
+        
     }
-    
-    /**
-     * Sets some heap memory.
-     *
-     * @param heap a constructed heap object.
-     */
-    void Allocator::setHeap(::api::Heap& heap)
-    {
-        heap_ = heap.isConstructed() ? &heap : NULL;
-    }
-      
-    /**
-     * Pointer to constructed heap memory (no boot).
-     */
-    ::api::Heap* Allocator::heap_;
-
 }
