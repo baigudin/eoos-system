@@ -17,7 +17,7 @@ namespace global
     {
         class Object : public ::global::Object<Allocator>
         {
-            typedef ::global::Object<Allocator> Parent;        
+            typedef ::global::Object<Allocator> Parent;
         
         public:
         
