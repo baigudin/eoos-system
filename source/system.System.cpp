@@ -18,7 +18,7 @@ namespace global
         System::System() : Parent(),
             config_ (),
             kernel_ (config_){
-            const bool isConstructed = construct();
+            bool const isConstructed = construct();
             setConstruct( isConstructed );
         }
         
@@ -48,7 +48,7 @@ namespace global
         {
             if( not Self::isConstructed() )
             {
-                terminate(SYSER_SYSCALL_CALLED);
+                terminate(ERROR_SYSCALL_CALLED);
             }
             return kernel_.getHeap();
         }    
@@ -70,7 +70,7 @@ namespace global
          */
         void System::terminate() const
         {
-            terminate(SYSER_USER_TERMINATION);
+            terminate(ERROR_USER_TERMINATION);
         }
         
         /**
@@ -80,11 +80,16 @@ namespace global
          */
         int32 System::execute()
         {
+            int32 error;
             if( not Self::isConstructed() )
             {
-                return SYSER_INITIALIZATION_FAILED;
+                error = ERROR_UNDEFINED;
             }
-            return Program::start();
+            else
+            {
+                error = Program::start();
+            }
+            return error;
         }
     
         /** 
@@ -96,7 +101,7 @@ namespace global
         {
             if(system_ == NULL)
             {
-                terminate(SYSER_SYSCALL_CALLED);
+                terminate(ERROR_SYSCALL_CALLED);
             }
             return *system_;
         }
@@ -108,20 +113,24 @@ namespace global
          */    
         bool System::construct()
         {
-            if( not Self::isConstructed() )
+            bool res = Self::isConstructed();
+            while(res == true)
             {
-                return false;
+                if( system_ != NULL )
+                {
+                    res = false;
+                    continue;
+                }            
+                if( not kernel_.isConstructed() )
+                {
+                    res = false;
+                    continue;
+                }
+                // The construction completed successfully
+                system_ = this;
+                break;
             }
-            if( system_ != NULL )
-            {
-                return false;
-            }
-            if( not kernel_.isConstructed() )
-            {
-                return false;        
-            }
-            system_ = this;
-            return true;
+            return res;            
         }
         
         /**
@@ -132,7 +141,8 @@ namespace global
         void System::terminate(Error)
         {
             // ... TODO ...
-            while(true);
+            volatile bool const isTerminate = true;
+            while( isTerminate ){};
         }
         
         /**

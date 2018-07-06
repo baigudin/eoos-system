@@ -10,8 +10,9 @@
 
 #include "system.Object.hpp"
 #include "api.System.hpp"
-#include "kernel.Kernel.hpp"
+#include "system.Kernel.hpp"
 #include "Configuration.hpp"
+#include "Error.hpp"
 
 namespace global
 {
@@ -76,35 +77,6 @@ namespace global
             
         private:
         
-            enum Error
-            {
-                /**
-                 * No errors occurred.
-                 */
-                SYSER_OK,
-                
-                /**
-                 * Error of the operating system has not been initialized.
-                 */
-                SYSER_INITIALIZATION_FAILED,
-    
-                /**
-                 * Error of a user program occurred.
-                 */            
-                SYSER_USER_TERMINATION,
-                        
-                /**
-                 * Error of the operating system syscall calling.
-                 */
-                SYSER_SYSCALL_CALLED,
-                
-                /**
-                 * Error of a no strinct MISRA C++ function calling.
-                 */
-                SYSER_NO_MISRA_FUNCTION_CALLED
-    
-            };
-        
             /**
              * Constructs this object.
              *
@@ -144,12 +116,12 @@ namespace global
              *
              * NOTE: The variable must be the first, as it must be initialized first.
              */
-            const global::Configuration config_;        
+            const Configuration config_;        
             
             /**
              * The operating system kernel.
              */
-            kernel::Kernel kernel_;      
+            system::Kernel kernel_;      
             
         };
     }
