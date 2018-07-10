@@ -24,7 +24,7 @@ namespace global
             config_ (config),
             cpu_    (config){
             bool const isConstructed = construct();
-            setConstruct( isConstructed );
+            setConstructed( isConstructed );
         }
         
         /** 
@@ -41,7 +41,7 @@ namespace global
          */    
         bool Kernel::isConstructed() const
         {
-            return getConstruct();
+            return Parent::isConstructed();
         }
         
         /**
