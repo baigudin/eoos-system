@@ -13,6 +13,16 @@ namespace global
     namespace system
     {
         /** 
+         * Calls the operating system kernel.
+         *
+         * @return the operating system syscall interface.
+         */         
+        api::System& syscall()
+        {
+            return System::call();
+        }    
+    
+        /** 
          * Constructor.
          */    
         System::System() : Parent(),
@@ -150,23 +160,5 @@ namespace global
          */
         api::System* System::system_ = NULL;
     }
-}
-
-/**
- * The main function.
- * 
- * The following tasks must be done before the function called:
- * 1. Stack has been set.
- * 2. CPU registers have been set.
- * 3. Run-time initialization has been completed.
- * 4. Global variables have been set.
- * 5. Global constructors have been called.
- * 
- * @return error code or zero.
- */   
-int main()
-{
-    ::global::system::System eoos;
-    return eoos.execute();
 }
 
