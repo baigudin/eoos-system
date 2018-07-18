@@ -7,7 +7,7 @@
  */
 #include "system.Allocator.hpp"
 
-namespace global
+namespace local
 {
     namespace system
     {

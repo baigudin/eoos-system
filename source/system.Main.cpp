@@ -21,7 +21,7 @@
  */   
 int main()
 {
-    ::global::system::System eoos;
+    ::local::system::System eoos;
     return eoos.execute();
 }
 

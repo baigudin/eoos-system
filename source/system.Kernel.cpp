@@ -8,7 +8,7 @@
 #include "system.Kernel.hpp"
 #include "library.Heap.hpp"
 
-namespace global
+namespace local
 {
     namespace system
     {

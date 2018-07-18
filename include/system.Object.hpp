@@ -11,13 +11,13 @@
 #include "Object.hpp"
 #include "system.Allocator.hpp"
 
-namespace global
+namespace local
 {
     namespace system
     {
-        class Object : public ::global::Object<Allocator>
+        class Object : public ::local::Object<Allocator>
         {
-            typedef ::global::Object<Allocator> Parent;
+            typedef ::local::Object<Allocator> Parent;
         
         public:
         

@@ -8,7 +8,7 @@
 #include "system.System.hpp"
 #include "Program.hpp"
 
-namespace global
+namespace local
 {
     namespace system
     {

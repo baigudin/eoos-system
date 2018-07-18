@@ -14,7 +14,7 @@
 #include "Configuration.hpp"
 #include "Error.hpp"
 
-namespace global
+namespace local
 {
     namespace system
     {

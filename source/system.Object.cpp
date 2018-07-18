@@ -7,7 +7,7 @@
  */
 #include "system.Object.hpp"
 
-namespace global
+namespace local
 {
     namespace system
     {
