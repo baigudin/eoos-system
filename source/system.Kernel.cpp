@@ -18,9 +18,9 @@ namespace local
          * @param config a operating system configuration.
          */    
         Kernel::Kernel(Configuration const config) : Parent(),
-            #ifdef NO_STRICT_MISRA_RULES    
+            #ifdef EOOS_NO_STRICT_MISRA_RULES    
             heap_   (NULL),
-            #endif // NO_STRICT_MISRA_RULES
+            #endif // EOOS_NO_STRICT_MISRA_RULES
             config_ (config),
             cpu_    (config){
             bool const isConstructed = construct();
@@ -51,7 +51,7 @@ namespace local
          */
         api::Heap& Kernel::getHeap() const
         {
-            #ifdef NO_STRICT_MISRA_RULES    
+            #ifdef EOOS_NO_STRICT_MISRA_RULES    
             if( not Self::isConstructed() )
             {
                 terminate(ERROR_SYSCALL_CALLED);
@@ -59,7 +59,7 @@ namespace local
             return *heap_;        
             #else    
             terminate(ERROR_SYSCALL_CALLED);
-            #endif // NO_STRICT_MISRA_RULES    
+            #endif // EOOS_NO_STRICT_MISRA_RULES    
         }
         
         /** 
@@ -149,7 +149,7 @@ namespace local
             bool res = Self::isConstructed();
             while(res == true)
             {
-                #ifdef NO_STRICT_MISRA_RULES
+                #ifdef EOOS_NO_STRICT_MISRA_RULES
                 // Construct a heap object
                 heap_ = new (config_.heapAddr) library::Heap(config_.heapSize);
                 if( heap_ == NULL || not heap_->isConstructed() ) 
@@ -157,7 +157,7 @@ namespace local
                     res = false;
                     continue;
                 }
-                #endif // NO_STRICT_MISRA_RULES
+                #endif // EOOS_NO_STRICT_MISRA_RULES
                 // The construction completed successfully
                 break;
             }

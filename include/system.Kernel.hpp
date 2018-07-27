@@ -144,14 +144,14 @@ namespace local
              */
             Kernel& operator =(const Kernel& obj);           
     
-            #ifdef NO_STRICT_MISRA_RULES    
+            #ifdef EOOS_NO_STRICT_MISRA_RULES    
             
             /**    
              * The operaing system kernel heap.
              */        
             api::SystemHeap* heap_;        
             
-            #endif // NO_STRICT_MISRA_RULES    
+            #endif // EOOS_NO_STRICT_MISRA_RULES    
             
             /**    
              * Configuration of the operating system.
