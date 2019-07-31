@@ -6,12 +6,12 @@
 
 enable_language(CXX)
 
-target_include_directories(${PROJECT_NAME}
+target_include_directories(eoos
 PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/include
 )
 
-target_sources(${PROJECT_NAME}
+target_sources(eoos
 PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/source/system.Allocator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/source/system.Main.cpp
