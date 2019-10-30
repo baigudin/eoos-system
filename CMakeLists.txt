@@ -4,12 +4,12 @@
 # @copyright 2019, Sergey Baigudin, Embedded Team
 # @license   http://embedded.team/license/
 
-target_include_directories(eoos
+target_include_directories(target-eoos
 PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/include
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
 )
 
-target_sources(eoos
+target_sources(target-eoos
 PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/source/system.Allocator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/source/system.Main.cpp
