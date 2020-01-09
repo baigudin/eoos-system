@@ -28,7 +28,7 @@ int main()
         ::local::system::System eoos;
         error = eoos.execute();
     }
-    // Handle unexpected exceptions following MISRA-C++:2008 Rule 15–3–2
+	// Handle unexpected exceptions following MISRA-C++:2008 Rule 15–3–2 and AUTOSAR C++14 Rule A15-3-2
     catch (...)
     {
         error = ::local::ERROR_UNDEFINED;
